@@ -12,6 +12,9 @@ const val TAGNAME = "tagName"
 typealias TagBlock = Tag.() -> Unit
 typealias TagAttr = Pair<String, String>
 
+/**
+ * tag context
+ */
 interface TagContext {
     fun paramValue(key: String): String?
 }
@@ -25,6 +28,9 @@ class DefaultTagContext : TagContext {
 
 class GenericTag(context: TagContext, tagName: String) : Tag(context, tagName)
 
+/**
+ * common tag, userd for html or xml.
+ */
 @TagMarker
 abstract class Tag(val context: TagContext, val tagName: String) {
     private val attrMap: TagPropMap = TagPropMap()
