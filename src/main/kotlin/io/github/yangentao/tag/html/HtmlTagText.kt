@@ -1,38 +1,41 @@
 @file:Suppress("unused")
 
-package io.github.yangentao.tag
+package io.github.yangentao.tag.html
 
+import io.github.yangentao.tag.TAGNAME
+import io.github.yangentao.tag.TAG_TEXT
+import io.github.yangentao.tag.TagContext
+import io.github.yangentao.tag.escapeHtml
 
-
-fun Tag.appendText(text: String?): TextTag? {
+fun HtmlTag.appendText(text: String?): HtmlText? {
     if (text != null) {
-        return add(TextTag(context, text))
+        return add(HtmlText(context, text))
     }
     return null
 }
 
-fun Tag.text(text: String?): TextTag? {
+fun HtmlTag.text(text: String?): HtmlText? {
     if (text != null) {
-        return add(TextTag(context, text))
+        return add(HtmlText(context, text))
     }
     return null
 }
 
-fun Tag.unsafe(text: String?) {
+fun HtmlTag.unsafe(text: String?) {
     if (text != null) {
-        add(TextTag(context, text, unsafe = true))
+        add(HtmlText(context, text, unsafe = true))
     }
 }
 
-fun Tag.unsafe(block: () -> String) {
+fun HtmlTag.unsafe(block: () -> String) {
     unsafe(block())
 }
 
-fun Tag.text(text: String, block: TextTag.() -> Unit): TextTag {
-    return add(TextTag(context, text)).apply(block)
+fun HtmlTag.text(text: String, block: HtmlText.() -> Unit): HtmlText {
+    return add(HtmlText(context, text)).apply(block)
 }
 
-fun Tag.pArticle(text: String) {
+fun HtmlTag.pArticle(text: String) {
     val textList = text.split("\n")
     for (s in textList) {
         this.p {
@@ -42,13 +45,13 @@ fun Tag.pArticle(text: String) {
     }
 }
 
-class TextTag(context: TagContext, var text: String = "", var unsafe: Boolean = false) : Tag(context, TEXT_TAG) {
+class HtmlText(context: TagContext, var text: String = "", var unsafe: Boolean = false) : HtmlTag(context, TAG_TEXT) {
     var formatOutput = true
     var forView = true
 
     override fun toHtml(buf: Appendable, level: Int) {
         val multiLine: Boolean = htmlMultiLine()
-        val parentMultiLine = parent?.htmlMultiLine() == true
+        val parentMultiLine = parentHtml?.htmlMultiLine() == true
 
         val s = if (unsafe) this.text else this.text.escapeHtml(forView)
         if (!formatOutput || parent?.tagName in listOf("pre", "code", "textarea")) {
@@ -70,7 +73,7 @@ class TextTag(context: TagContext, var text: String = "", var unsafe: Boolean = 
 
 }
 
-fun Tag.scriptsToBottom() {
+fun HtmlTag.scriptsToBottom() {
     val ls = this.filter(TAGNAME to "script")
     for (a in ls) {
         a.removeFromParent()

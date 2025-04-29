@@ -1,8 +1,8 @@
-package io.github.yangentao.tag
+package io.github.yangentao.tag.html
 
 import kotlin.reflect.KClass
 
-internal val htmlTagMap: Map<String, KClass<*>> = mapOf(
+internal val htmlTagMap: Map<String, KClass<out HtmlTag>> = mapOf(
     "main" to HtmlMain::class,
     "header" to HtmlHeader::class,
     "head" to HtmlHead::class,
