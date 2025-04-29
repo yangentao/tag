@@ -197,7 +197,7 @@ abstract class Tag(val context: TagContext, val tagName: String) {
         buf.append("<").append(this.tagName)
         for ((k, v) in attrMap) {
             buf.append(' ')
-            buf.append(k).append("=").append(v)
+            buf.append(k).append("=").append("\"$v\"")
         }
         buf.append(">")
         for (ch in this.children) {

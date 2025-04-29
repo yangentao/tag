@@ -31,7 +31,7 @@ open class XmlTag(context: TagContext, tagName: String) : Tag(context, tagName) 
 
 open class XmlRoot(context: TagContext, tagName: String) : XmlTag(context, tagName) {
     override fun toString(): String {
-        return """<?xml version = "1.0"?>""" + "\n" + super.toString()
+        return """<?xml version="1.0" ?>""" + "\n" + super.toString()
     }
 }
 
