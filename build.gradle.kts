@@ -16,7 +16,7 @@ plugins {
 
 group = "io.github.yangentao"
 
-version = "1.0.1"
+version = "1.1.0"
 val artifactName = "tag"
 val githubLib = "tag"
 val descLib = "Kotlin tags."
@@ -31,7 +31,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib"))
-    implementation("io.github.yangentao:anno:[1.0.2,)")
+    implementation("io.github.yangentao:anno:[1.1.0,)")
 }
 
 tasks.test {
