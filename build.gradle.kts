@@ -7,7 +7,7 @@ buildscript {
     }
 }
 plugins {
-    kotlin("jvm") version "2.1.20"
+    kotlin("jvm") version "2.2.0"
     signing
     id("maven-publish")
     id("org.jetbrains.dokka") version "2.0.0"
@@ -16,7 +16,7 @@ plugins {
 
 group = "io.github.yangentao"
 
-version = "1.1.0"
+version = "2.0.0"
 val artifactName = "tag"
 val githubLib = "tag"
 val descLib = "Kotlin tags."
@@ -31,7 +31,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib"))
-    implementation("io.github.yangentao:anno:[1.1.0,)")
+    implementation("io.github.yangentao:anno:[2.0.0,)")
 }
 
 tasks.test {

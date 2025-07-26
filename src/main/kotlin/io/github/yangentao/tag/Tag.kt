@@ -15,7 +15,7 @@ typealias TagAttr = Pair<String, String>
 /**
  * tag context
  */
-interface TagContext {
+fun interface TagContext {
     fun paramValue(key: String): String?
 }
 
